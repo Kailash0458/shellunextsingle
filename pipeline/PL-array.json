@@ -9,11 +9,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('DataArray')",
+						"value": "@pipeline().parameters.account_name",
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@not(equals(item(),'cc'))",
+						"value": "@not(equals(item(),'ccc' ))",
 						"type": "Expression"
 					}
 				}
@@ -21,8 +21,12 @@
 		],
 		"parameters": {
 			"account_name": {
-				"type": "string",
-				"defaultValue": "ab-8672"
+				"type": "array",
+				"defaultValue": [
+					"aa",
+					"bbb",
+					"123"
+				]
 			}
 		},
 		"variables": {
