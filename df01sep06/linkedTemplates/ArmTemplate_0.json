@@ -21,6 +21,57 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL-array')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Filter1",
+						"type": "Filter",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.account_name",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@not(equals(item(),'ccc' ))",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"account_name": {
+						"type": "array",
+						"defaultValue": [
+							"aa",
+							"bbb",
+							"123"
+						]
+					}
+				},
+				"variables": {
+					"DataArray": {
+						"type": "Array",
+						"defaultValue": [
+							"aaa",
+							"bbb",
+							"cc"
+						]
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -34,47 +85,6 @@
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					}
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL-array')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Filter1",
-						"type": "Filter",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@variables('DataArray')",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@not(equals(item(),'cc'))",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"variables": {
-					"DataArray": {
-						"type": "Array",
-						"defaultValue": [
-							"aaa",
-							"bbb",
-							"cc"
-						]
-					}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		}
