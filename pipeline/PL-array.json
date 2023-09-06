@@ -1,0 +1,24 @@
+{
+	"name": "PL-array",
+	"properties": {
+		"activities": [
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
+		"variables": {
+			"DataArray": {
+				"type": "Array",
+				"defaultValue": [
+					"aaa",
+					"bbb",
+					"cc"
+				]
+			}
+		},
+		"annotations": []
+	}
+}
